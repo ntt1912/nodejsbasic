@@ -17,9 +17,6 @@ let getDetailTab = async (req, res) => {
 
 let createNewAccount = async (req, res) => {
     let { page, date, email, password } = req.body;
-    // if (!page || !date || !email || !password) {
-    //     return res.status(400).send('Missing required parameters');
-    // }
     let hashedPassword = await bcrypt.hash(password, 10);
     await pool.execute('insert into accounts(page, date, email,password) values(? , ?, ? , ? )',
         [page, date, email, hashedPassword]);
